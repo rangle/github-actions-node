@@ -21,17 +21,30 @@ jobs:
       - name: Checkout repo code 
         uses: actions/checkout@v2
       
-      - name: Build docker container
-        run: docker build -t node-docker --target test .
+      # - name: Build docker container
+      #   run: docker build -t node-docker --target test .
 
-      - name: Run docker container with tests
-        run: docker run --rm --name node-test node-docker
-      # - name: Start docker-compose to run containers
-      #   run: docker-compose build -t node-docker --target test . 
+      # - name: Run docker container with tests
+      #   run: docker run --rm --name node-test node-docker
+      # # - name: Start docker-compose to run containers
+      # #   run: docker-compose build -t node-docker --target test . 
 
-      # - name: Run tests
-      #   run: docker-compose run --rm --name node-test node-docker
+      # # - name: Run tests
+      # #   run: docker-compose run --rm --name node-test node-docker
       
-      - name: Stop containers
-        if: always()
-        run: docker-compose -f "docker-compose.yml" down
+      # - name: Stop containers
+      #   if: always()
+      #   run: docker-compose -f "docker-compose.yml" down
+
+        - name: Start containers
+          run: docker-compose -f "docker-compose.yml" up -d --build
+
+        - name: Install dependencies
+          run: npm install
+
+        - name: Run tests
+          run: npm run test
+
+        - name: Stop containers
+          if: always()
+          run: docker-compose -f "docker-compose.yml" down
