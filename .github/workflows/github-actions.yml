@@ -8,7 +8,6 @@ on:
 jobs:
   runner-job:
     runs-on: ubuntu-latest
-    container: node:10.18-jessie
 
     services:
       mongodb:
@@ -21,15 +20,17 @@ jobs:
     steps:
       - name: Checkout repo code 
         uses: actions/checkout@v2
-
+      
       - name: Build docker container
         run: docker build -t node-docker --target test .
 
       - name: Run docker container with tests
         run: docker run --rm --name node-test node-docker
-     
       # - name: Start docker-compose to run containers
       #   run: docker-compose build -t node-docker --target test . 
+
+      # - name: Run tests
+      #   run: docker-compose run --rm --name node-test node-docker
       
       - name: Stop containers
         if: always()
