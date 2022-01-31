@@ -9,25 +9,25 @@ jobs:
   runner-job:
     runs-on: ubuntu-latest
 
-    services:
-      mongodb:
-        image: mongo:latest
-        ports:
-          - 27017:27017
-        volumes:
-          - data:/data/db
+    # services:
+    #   mongodb:
+    #     image: mongo:latest
+    #     ports:
+    #       - 27017:27017
+    #     volumes:
+    #       - data:/data/db
 
     steps:
       - name: Checkout repo code 
         uses: actions/checkout@v2
       
-      - name: Build docker container
-        run: docker build -t node-docker --target test .
+      # - name: Build docker container
+      #   run: docker build -t node-docker --target test .
 
-      - name: Run docker container with tests
-        run: docker run --rm --name node-test node-docker
-      # - name: Start docker-compose to run containers
-      #   run: docker-compose up --exit-code-from web
+      # - name: Run docker container with tests
+      #   run: docker run --rm --name node-test node-docker
+      - name: Start docker-compose to run containers
+        run: docker-compose build
       
       - name: Stop containers
         if: always()
