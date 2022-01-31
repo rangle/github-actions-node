@@ -13,13 +13,13 @@ jobs:
       - name: Checkout repo code 
         uses: actions/checkout@v2
       
-      # - name: Build docker container
-      #   run: docker build -t node-docker --target test .
+      - name: Build docker container
+        run: docker build -t node-docker --target test .
 
-      # - name: Run docker container with tests
-      #   run: docker run --rm --name node-test node-docker
-      - name: Start docker-compose to run containers
-        run: docker-compose up --exit-code-from web -f
+      - name: Run docker container with tests
+        run: docker run --rm --name node-test node-docker
+      # - name: Start docker-compose to run containers
+      #   run: docker-compose up --exit-code-from web
       
       - name: Stop containers
         if: always()

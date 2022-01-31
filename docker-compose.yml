@@ -10,7 +10,7 @@ services:
       - .:/code/my-app
     links:
       - mongodb
-    command: "npm run test"
+    # command: "npm run test"
 
   mongodb:
     image: mongo:latest
