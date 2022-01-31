@@ -13,5 +13,12 @@ jobs:
       - name: Checkout repo code 
         uses: actions/checkout@v2
       
+      - name: Start docker-compose to run containers
+        run: docker-compose -f "docker-compose.yml" up -d --build
+      
       - name: Run tests using Jest
-        run: npm run tests
+        run: npm run test
+      
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f "docker-compose.yml" down
