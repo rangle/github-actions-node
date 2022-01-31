@@ -30,7 +30,7 @@ jobs:
         run: docker-compose build -t node-docker --target test . 
 
       - name: Run tests
-        run: docker run --rm --name node-test node-docker
+        run: docker-compose run --rm --name node-test node-docker
       
       - name: Stop containers
         if: always()
