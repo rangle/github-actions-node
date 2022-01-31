@@ -16,9 +16,6 @@ jobs:
       - name: Start docker-compose to run containers
         run: docker-compose -f "docker-compose.yml" up -d --build
       
-      - name: Run tests using Jest
-        run: npm run test
-      
       - name: Stop containers
         if: always()
         run: docker-compose -f "docker-compose.yml" down

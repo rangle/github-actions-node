@@ -11,7 +11,6 @@ COPY package-lock.json package-lock.json
 
 # Install packages 
 RUN npm install
-
 RUN npm run test
 
 # Copy all files from local directory into /code directory
