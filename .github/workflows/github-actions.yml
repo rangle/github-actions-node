@@ -36,15 +36,15 @@ jobs:
       #   if: always()
       #   run: docker-compose -f "docker-compose.yml" down
 
-        - name: Start containers
-          run: docker-compose -f "docker-compose.yml" up -d --build
+      - name: Start containers
+        run: docker-compose -f "docker-compose.yml" up -d --build
 
-        - name: Install dependencies
-          run: npm install
+      - name: Install dependencies
+        run: npm install
 
-        - name: Run tests
-          run: npm run test
+      - name: Run tests
+        run: npm run test
 
-        - name: Stop containers
-          if: always()
-          run: docker-compose -f "docker-compose.yml" down
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f "docker-compose.yml" down
