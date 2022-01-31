@@ -3,7 +3,7 @@ services:
     image: nodejs_mongo_docker
     build: .
     environment:
-      NODE_ENV: production
+      - MONGO_URI=mongodb://mongodb:27017/test
     ports:
       - 3000:3000
     volumes:
