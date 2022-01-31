@@ -27,7 +27,10 @@ jobs:
       # - name: Run docker container with tests
       #   run: docker run --rm --name node-test node-docker
       - name: Start docker-compose to run containers
-        run: docker-compose build
+        run: docker-compose build -t node-docker --target test . 
+
+      - name: Run tests
+        run: docker run --rm --name node-test node-docker
       
       - name: Stop containers
         if: always()
