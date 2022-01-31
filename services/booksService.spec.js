@@ -78,8 +78,8 @@ describe('test getBooks', () => {
   it('saves successfully if req.body data is valid', async () => {
     //have to connect to mongoose otherwise the async call book.save() will hang
     await mongoose
-      .connect('mongodb://mongodb:27017/test', {
-        dbName: 'sample-db',
+      .connect('mongodb://mongodb:27017', {
+        dbName: 'test',
       })
       .then(() => {
         console.log('connected to mongodb');
