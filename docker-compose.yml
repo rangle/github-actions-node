@@ -10,8 +10,6 @@ services:
       - mongodb
     volumes:
       - .:/code/my-app
-    links:
-      - mongodb
     networks:
       - my_net
 
