@@ -6,17 +6,25 @@ services:
       - MONGO_URI=mongodb://mongodb:27017/test
     ports:
       - 3000:3000
+    depends_on:
+      - mongodb
     volumes:
       - .:/code/my-app
     links:
       - mongodb
+    networks:
+      - my_net
 
   mongodb:
     image: mongo
     ports:
       - 27017:27017
-    volumes:
-      - data:/data/db
+    networks:
+      - my_net
 
-volumes:
+networks:
+  my_net:
+    driver: bridge
+
+
   data:
