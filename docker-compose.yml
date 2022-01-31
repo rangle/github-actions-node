@@ -2,12 +2,8 @@ services:
   nodejs_mongo_docker:
     image: nodejs_mongo_docker
     build: .
-    environment:
-      - MONGO_URI=mongodb://mongodb:27017/test
     ports:
       - 3000:3000
-    depends_on:
-      - mongodb
     volumes:
       - .:/code/my-app
     networks:
@@ -23,6 +19,3 @@ services:
 networks:
   my_net:
     driver: bridge
-
-
-  data:
