@@ -18,5 +18,5 @@ COPY . .
 
 # Docker runs this command 
 WORKDIR /code/my-app
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start", "npm run test"]
 
