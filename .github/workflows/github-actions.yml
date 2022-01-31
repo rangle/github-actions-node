@@ -13,8 +13,13 @@ jobs:
       - name: Checkout repo code 
         uses: actions/checkout@v2
       
-      - name: Start docker-compose to run containers
-        run: docker-compose -f "docker-compose.yml" up -d --build
+      - name: Build docker container
+        run: docker build -t node-docker --target test .
+
+      - name: Run docker container with tests
+        run: docker run -it --rm --name node-test node-docker
+      # - name: Start docker-compose to run containers
+      #   run: docker-run -f "docker-compose.yml" up -d --build
       
       - name: Stop containers
         if: always()

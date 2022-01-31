@@ -1,6 +1,6 @@
 
 # Get package from docker-hub
-FROM node:16.13.1-buster
+FROM node:16.13.1-buster as base
 
 # Set our working directory to /code
 WORKDIR /code
@@ -11,12 +11,19 @@ COPY package-lock.json package-lock.json
 
 # Install packages 
 RUN npm install
-RUN npm run test
 
-# Copy all files from local directory into /code directory
-COPY . . 
+FROM base as test
+RUN npm ci
+COPY . .
+CMD [ "npm","run", "test" ]
+
+# # Copy all files from local directory into /code directory
+# COPY . . 
 
 # Docker runs this command 
+FROM base as prod
+RUN npm ci --production
+COPY . .
 WORKDIR /code/my-app
-CMD ["npm", "run", "start", "npm run test"]
+CMD ["npm", "run", "start"]
 
