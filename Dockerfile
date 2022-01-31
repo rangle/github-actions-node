@@ -1,6 +1,6 @@
 
 # Get package from docker-hub
-FROM node:16.13.1-buster as base
+FROM node:17-buster as base
 
 # Set our working directory to /code
 WORKDIR /code
