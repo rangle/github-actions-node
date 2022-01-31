@@ -10,19 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      nodejs_mongo_docker:
-        image: nodejs_mongo_docker
-        build: .
-        environment:
-          NODE_ENV: production
-        ports:
-          - 3000:3000
-        volumes:
-          - .:/code/my-app
-        links:
-          - mongodb
-        # command: "npm run test"
-
       mongodb:
         image: mongo:latest
         ports:
@@ -30,18 +17,18 @@ jobs:
         volumes:
           - data:/data/db
 
-    # steps:
-    #   - name: Checkout repo code 
-    #     uses: actions/checkout@v2
+    steps:
+      - name: Checkout repo code 
+        uses: actions/checkout@v2
       
-    #   - name: Build docker container
-    #     run: docker build -t node-docker --target test .
+      - name: Build docker container
+        run: docker build -t node-docker --target test .
 
-    #   - name: Run docker container with tests
-    #     run: docker run --rm --name node-test node-docker
-    #   # - name: Start docker-compose to run containers
-    #   #   run: docker-compose up --exit-code-from web
+      - name: Run docker container with tests
+        run: docker run --rm --name node-test node-docker
+      # - name: Start docker-compose to run containers
+      #   run: docker-compose up --exit-code-from web
       
-    #   - name: Stop containers
-    #     if: always()
-    #     run: docker-compose -f "docker-compose.yml" down
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f "docker-compose.yml" down
