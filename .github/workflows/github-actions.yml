@@ -49,8 +49,8 @@ jobs:
       #   run: docker-compose run --rm --name node-test node-docker
 
       #TODO - uncomment
-      # - name: Start containers
-        # run: docker-compose -f "docker-compose.yml" up -d --build
+      - name: Start containers
+        run: docker-compose -f "docker-compose.yml" up -d --build
       
       # - name: Stop containers
       #   if: always()
