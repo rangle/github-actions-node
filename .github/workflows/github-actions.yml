@@ -47,7 +47,7 @@ jobs:
 
       - name: Run docker build
         run: | 
-          docker-compose up -d
+          npm run start
 
       - name: Stop containers
         if: always()
