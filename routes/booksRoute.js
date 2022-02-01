@@ -7,7 +7,7 @@ const booksService = require('../services/booksService');
 router.use(express.json());
 
 router.use((req, res, next) => {
-  console.log('Middleware called on every GET 
+  console.log('Middleware called on every GET Request');
   next();
 });
 
