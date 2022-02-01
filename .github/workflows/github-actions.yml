@@ -47,8 +47,7 @@ jobs:
 
       - name: Run docker build
         run: | 
-          docker-compose up -d
-          docker-compose stop
+          docker-compose up --abort-on-container-exit
 
       - name: Stop containers
         if: always()
