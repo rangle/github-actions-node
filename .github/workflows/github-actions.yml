@@ -9,11 +9,11 @@ jobs:
   runner-job:
     runs-on: ubuntu-latest
 
-    services:
-      mongodb:
-        image: mongo
-        ports:
-          - 27017:27017
+    # services:
+    #   mongodb:
+    #     image: mongo
+    #     ports:
+    #       - 27017:27017
 
       # nodejs_mongo_docker:
       #   image: nodejs_mongo_docker
