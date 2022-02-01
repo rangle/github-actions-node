@@ -46,8 +46,7 @@ jobs:
         run: npm run test
 
       - name: Run docker build
-        run: | 
-          npm run start
+        run: npm run start
 
       - name: Stop containers
         if: always()
