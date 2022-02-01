@@ -12,10 +12,10 @@ COPY package-lock.json package-lock.json
 # Install packages 
 RUN npm install
 
-FROM base as test
-RUN npm ci
-COPY . .
-RUN ["npm", "run", "test"]
+# FROM base as test
+# RUN npm ci
+# COPY . .
+# RUN ["npm", "run", "test"]
 
 # # Copy all files from local directory into /code directory
 # COPY . . 
