@@ -103,4 +103,10 @@ describe('test getBooks', () => {
     expect(results.year).toEqual(req.body.year);
     expect(results.author).toEqual(req.body.author);
   });
+
+  afterAll((done) => {
+    // Closing the DB connection allows Jest to exit successfully.
+    mongoose.connection.close();
+    done();
+  });
 });
