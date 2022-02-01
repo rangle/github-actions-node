@@ -1,7 +1,22 @@
+
+networks:
+  my_net:
+    driver: bridge
+
 services:
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    command: mongod --quiet --logpath /dev/null 
+    networks:
+      - my_net
+
   nodejs_mongo_docker:
     image: nodejs_mongo_docker
     build: .
+    depends_on:
+      - "mongodb"
     ports:
       - 3000:3000
     volumes:
@@ -9,13 +24,4 @@ services:
     networks:
       - my_net
 
-  mongodb:
-    image: mongo
-    ports:
-      - 27017:27017
-    networks:
-      - my_net
 
-networks:
-  my_net:
-    driver: bridge

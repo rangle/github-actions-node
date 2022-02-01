@@ -5,15 +5,35 @@ on:
     branches:
       - main
 
+networks:
+  my_net:
+    driver: bridge
+
 jobs:
   runner-job:
     runs-on: ubuntu-latest
 
-    services:
-      mongodb:
-        image: mongo:latest
-        ports:
-          - 27017:27017
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    command: mongod --quiet --logpath /dev/null 
+    networks:
+      - my_net
+
+  nodejs_mongo_docker:
+    image: nodejs_mongo_docker
+    build: .
+    depends_on:
+      - "mongodb"
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/code/my-app
+    networks:
+      - my_net
+
 
     steps:
       - name: Checkout repo code 
@@ -27,19 +47,22 @@ jobs:
 
       # - name: Run docker container with tests
       #   run: docker run --rm --name node-test node-docker
-      
+
       # - name: Start docker-compose to run containers
       #   run: docker-compose build -t node-docker --target test . 
 
-      # # - name: Run tests
-      # #   run: docker-compose run --rm --name node-test node-docker
+      # - name: Run tests
+      #   run: docker-compose run --rm --name node-test node-docker
+
+      #TODO - uncomment
+      # - name: Start containers
+        # run: docker-compose -f "docker-compose.yml" up -d --build
       
       # - name: Stop containers
       #   if: always()
       #   run: docker-compose -f "docker-compose.yml" down
 
-      # - name: Start containers
-      #   run: docker-compose -f "docker-compose.yml" up -d --build
+
 
       # - name: Install dependencies
       #   run: npm install
