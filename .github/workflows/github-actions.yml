@@ -15,15 +15,15 @@ jobs:
         ports:
           - 27017:27017
 
-      nodejs_mongo_docker:
-        image: nodejs_mongo_docker
-        build: .
-        depends_on:
-          - "mongodb"
-        ports:
-          - 3000:3000
-        volumes:
-          - .:/code/my-app
+      # nodejs_mongo_docker:
+      #   image: nodejs_mongo_docker
+      #   build: .
+      #   depends_on:
+      #     - "mongodb"
+      #   ports:
+      #     - 3000:3000
+      #   volumes:
+      #     - .:/code/my-app
 
 
     steps:
