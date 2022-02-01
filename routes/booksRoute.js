@@ -12,7 +12,7 @@ router.use((req, res, next) => {
 });
 
 router.use('/latest', (req, res, next) => {
-  console.log('Middleware called on books/latest
+  console.log('Middleware called on books/latest route ');
   next();
 });
 
