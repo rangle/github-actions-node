@@ -53,7 +53,11 @@ jobs:
 
       #TODO - uncomment
       - name: Start containers
-        run: docker-compose -f "docker-compose.yml" up -d --build
+        run: docker-compose -f "docker-compose.yml" up -d
+
+      # - name: Start containers
+      #   run: docker-compose -f "docker-compose.yml" up -d --build
+      
       
       # - name: Stop containers
       #   if: always()
