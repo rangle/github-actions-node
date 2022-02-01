@@ -25,5 +25,5 @@ FROM base as prod
 RUN npm ci --production
 COPY . .
 WORKDIR /code/my-app
-CMD ["npm", "run", "start"]
+# CMD ["npm", "run", "start"]
 
