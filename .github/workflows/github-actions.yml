@@ -13,26 +13,26 @@ jobs:
   runner-job:
     runs-on: ubuntu-latest
 
-services:
-  mongodb:
-    image: mongo
-    ports:
-      - 27017:27017
-    command: mongod --quiet --logpath /dev/null 
-    networks:
-      - my_net
+    services:
+      mongodb:
+        image: mongo
+        ports:
+          - 27017:27017
+        command: mongod --quiet --logpath /dev/null 
+        networks:
+          - my_net
 
-  nodejs_mongo_docker:
-    image: nodejs_mongo_docker
-    build: .
-    depends_on:
-      - "mongodb"
-    ports:
-      - 3000:3000
-    volumes:
-      - .:/code/my-app
-    networks:
-      - my_net
+      nodejs_mongo_docker:
+        image: nodejs_mongo_docker
+        build: .
+        depends_on:
+          - "mongodb"
+        ports:
+          - 3000:3000
+        volumes:
+          - .:/code/my-app
+        networks:
+          - my_net
 
 
     steps:
