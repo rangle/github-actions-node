@@ -45,6 +45,11 @@ jobs:
       - name: Run tests
         run: npm run test
 
+      - name: Run docker build
+        run: | 
+          docker-compose up 
+          docker-compose stop
+
       - name: Stop containers
         if: always()
         run: docker-compose -f "docker-compose.yml" down
