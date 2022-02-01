@@ -46,7 +46,7 @@ jobs:
       #   run: docker-compose build -t node-docker --target test . 
 
       - name: Stop integration tests
-        run: docker-compose close
+        run: docker-compose down
 
       # - name: Run tests
       #   run: docker-compose run --rm --name node-test node-docker
