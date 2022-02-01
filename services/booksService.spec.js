@@ -78,7 +78,7 @@ describe('test getBooks', () => {
   it('saves successfully if req.body data is valid', async () => {
     //have to connect to mongoose otherwise the async call book.save() will hang
     await mongoose
-      .connect('mongodb://mongodb:27017', {
+      .connect('mongodb://localhost:27017', {
         dbName: 'test',
       })
       .then(() => {
@@ -99,7 +99,7 @@ describe('test getBooks', () => {
     const results = await booksService.add(req, res);
 
     // expect(book.save).toHaveBeenCalledTimes(1);
-    expect(results.name).not.toEqual(req.body.name);
+    expect(results.name).toEqual(req.body.name);
     expect(results.year).toEqual(req.body.year);
     expect(results.author).toEqual(req.body.author);
   });
