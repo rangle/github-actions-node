@@ -6,8 +6,6 @@ networks:
 services:
   mongodb:
     image: mongo
-    ports:
-      - 27017:27017
     command: mongod --quiet --logpath /dev/null 
     networks:
       - my_net
