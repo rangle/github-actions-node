@@ -99,7 +99,7 @@ describe('test getBooks', () => {
     const results = await booksService.add(req, res);
 
     // expect(book.save).toHaveBeenCalledTimes(1);
-    expect(results.name).toEqual(req.body.name);
+    expect(results.name).not.toEqual(req.body.name);
     expect(results.year).toEqual(req.body.year);
     expect(results.author).toEqual(req.body.author);
   });

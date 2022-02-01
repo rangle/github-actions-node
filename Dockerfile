@@ -15,7 +15,7 @@ RUN npm install
 FROM base as test
 RUN npm ci
 COPY . .
-CMD [ "npm","run", "test" ]
+RUN npm run test
 
 # # Copy all files from local directory into /code directory
 # COPY . . 
