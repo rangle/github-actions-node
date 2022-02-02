@@ -9,23 +9,6 @@ jobs:
   runner-job:
     runs-on: ubuntu-latest
 
-    # services:
-    #   mongodb:
-    #     image: mongo
-    #     ports:
-    #       - 27017:27017
-
-      # nodejs_mongo_docker:
-      #   image: nodejs_mongo_docker
-      #   build: .
-      #   depends_on:
-      #     - "mongodb"
-      #   ports:
-      #     - 3000:3000
-      #   volumes:
-      #     - .:/code/my-app
-
-
     steps:
       - name: Checkout repo code 
         uses: actions/checkout@v2
@@ -53,7 +36,7 @@ jobs:
 
       #TODO - uncomment
       - name: Start containers
-        run: docker-compose up -d
+        run: docker-compose up 
 
       # - name: Start containers
       #   run: docker-compose -f "docker-compose.yml" up -d --build
