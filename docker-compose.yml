@@ -1,4 +1,3 @@
-
 networks:
   my_net:
     driver: bridge
@@ -7,8 +6,8 @@ services:
   mongodb:
     image: mongo
     command: mongod --quiet --logpath /dev/null 
-    networks:
-      - my_net
+    # networks:
+    #   - my_net
 
   nodejs_mongo_docker:
     image: nodejs_mongo_docker
@@ -19,7 +18,6 @@ services:
       - 3000:3000
     volumes:
       - .:/code/my-app
-    networks:
-      - my_net
-
+    # networks:
+    #   - my_net
 
