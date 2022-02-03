@@ -4,6 +4,7 @@ const Book = require('../models/book');
 const Helper = require('../helper/helper');
 const mongoose = require('mongoose');
 
+//TODO
 // jest.mock('../models/book');
 // jest.mock('../helper/helper');
 
@@ -25,20 +26,36 @@ const expected = [
 // Helper.retrieveAuthor = jest.fn().mockReturnValue('Bill Murray');
 
 //This is run after every test block to ensure we're using the mock from above
-
 beforeEach(() => {
   jest.resetAllMocks;
-  jest.restoreAllMocks();
   jest.clearAllMocks();
 });
 
 afterEach(() => {
   jest.resetAllMocks;
-  jest.restoreAllMocks();
   jest.clearAllMocks();
 });
 
 describe('test getBooks', () => {
+  beforeAll(async () => {
+    //have to connect to mongoose otherwise the async call book.save() will hang
+    await mongoose
+      .connect('mongodb://mongodb:27017/test', {
+        dbName: 'sample-db',
+      })
+      .then(() => {
+        console.log('connected to mongodb');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
+  afterAll((done) => {
+    mongoose.connection.close();
+    done();
+  });
+
   it('checks whether default author is added to every book', async () => {
     const data = [
       { name: 'True Grit', year: 1976 },
@@ -67,27 +84,21 @@ describe('test getBooks', () => {
       author: 'Bill Murray',
     });
 
-    try {
-      const invalidBook = await book.save();
-      console.log(invalidBook);
-    } catch (err) {
-      expect(err).not.toBeNull();
-    }
+    // Different ways to assert and capture error
+    await expect(book.save()).rejects.toThrow(
+      new Error('Book validation failed: name: Path `name` is required.'),
+    );
+
+    // try {
+    // const invalidBook = await book.save();
+    // console.log(invalidBook);
+    // } catch (err) {
+    //   expect(err).toBe(ValidationError);
+    //   // expect(err).not.toBeNull();
+    // }
   });
 
   it('saves successfully if req.body data is valid', async () => {
-    //have to connect to mongoose otherwise the async call book.save() will hang
-    await mongoose
-      .connect('mongodb://mongodb:27017', {
-        dbName: 'test',
-      })
-      .then(() => {
-        console.log('connected to mongodb');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
     const req = {
       body: {
         year: 1982,
@@ -98,15 +109,10 @@ describe('test getBooks', () => {
     const res = {};
     const results = await booksService.add(req, res);
 
-    // expect(book.save).toHaveBeenCalledTimes(1);
     expect(results.name).toEqual(req.body.name);
     expect(results.year).toEqual(req.body.year);
     expect(results.author).toEqual(req.body.author);
-  });
 
-  afterAll((done) => {
-    // Closing the DB connection allows Jest to exit successfully.
-    mongoose.connection.close();
-    done();
+    // await expect(booksService.add(req, res)).resolves.toEqual(req.body);
   });
 });

@@ -16,43 +16,15 @@ jobs:
       - name: Install dependencies
         run: npm install
       
-      # - name: Build docker container
-      #   run: docker build -t node-docker --target test .
-
       - name: Run docker-compose tests
         run: docker-compose -p tests run --rm nodejs_mongo_docker npm run test
-
-      # - name: Run docker container with tests
-      #   run: docker run --rm --name node-test node-docker
-
-      # - name: Start docker-compose to run containers
-      #   run: docker-compose build -t node-docker --target test . 
 
       - name: Stop integration tests
         run: docker-compose down
 
-      # - name: Run tests
-      #   run: docker-compose run --rm --name node-test node-docker
-
       #TODO - uncomment
       - name: Start containers
         run: docker-compose up -d
-
-      # - name: Start containers
-      #   run: docker-compose -f "docker-compose.yml" up -d --build
-      
-      
-      # - name: Stop containers
-      #   if: always()
-      #   run: docker-compose -f "docker-compose.yml" down
-
-
-
-      # - name: Install dependencies
-      #   run: npm install
-
-      # - name: Run tests
-      #   run: npm run test
 
       - name: Stop containers
         if: always()
